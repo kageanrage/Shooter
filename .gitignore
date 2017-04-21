@@ -8,6 +8,7 @@
 # kev-added
 __pycache__/
 .cache
+.idea/
 
 # User-specific stuff:
 .idea/**/workspace.xml

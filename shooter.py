@@ -1,9 +1,6 @@
 # Shooter.py - a self-designed baddie shooting game
-# adding some text to see if this appears in Github Desktop
-# adding yet another line of text
 
 # next steps:
-# if baddie reaches bottom of screen, end game
 # ease difficulty increase and tweak - solve baddie_interval update issue
 # Once level passed, pause and show message ‘Level X passed!’
 
@@ -51,6 +48,7 @@ def run_game():
             gf.check_bullet_collisions(baddies, bullets, stats, audio)
             gf.update_baddies(baddies, settings, stats)
             gf.check_baddie_player_collisions(baddies, player, stats, bullets, audio)
+            gf.check_baddie_screen_bottom(screen, stats, player, bullets, baddies, audio)
         gf.update_screen(player, screen, bullets, baddies, sb, stats, end_msg, play_button)
 
 

@@ -88,7 +88,6 @@ def update_screen(player, screen, bullets, baddies, sb, stats, end_msg, play_but
         if not stats.is_first_round:
             end_msg.prep_msg(play_button)
             end_msg.show_msg()
-
     pygame.display.flip()
 
 
@@ -132,16 +131,21 @@ def update_baddies(baddies, settings, stats):
 
 def check_baddie_player_collisions(baddies, player, stats, bullets, audio):
     if pygame.sprite.spritecollideany(player, baddies):
-        player_hit(stats, player, bullets, baddies, audio)
+        life_lost(stats, player, bullets, baddies, audio)
 
 
-def player_hit(stats, player, bullets, baddies, audio):
-    print('Player hit!!!')
+def check_baddie_screen_bottom(screen, stats, player, bullets, baddies, audio):
+    screen_rect = screen.get_rect()
+    for baddie in baddies:
+        if baddie.rect.bottom >= screen_rect.bottom:
+            life_lost(stats, player, bullets, baddies, audio)
+
+
+def life_lost(stats, player, bullets, baddies, audio):
     if stats.lives_remaining >= 1:
         stats.lives_remaining -= 1
     else:
         end_game(stats)
-    print('Lives = {}'.format(stats.lives_remaining))
     audio.player_ded.play()
     time.sleep(0.2)
     reset_positions(player, bullets, baddies)

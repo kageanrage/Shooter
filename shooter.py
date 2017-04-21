@@ -1,4 +1,5 @@
 # Shooter.py - a self-designed baddie shooting game
+# adding some text to see if this appears in Github Desktop
 
 # next steps:
 # if baddie reaches bottom of screen, end game

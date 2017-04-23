@@ -10,7 +10,6 @@ class GameStats:
 
         self.level = 1
         self.baddie_drop_speed = self.settings.starting_baddie_drop_speed
-        self.baddie_interval = self.settings.starting_baddie_interval
         self.baddie_total = self.settings.starting_baddie_total
 
         self.game_active = False

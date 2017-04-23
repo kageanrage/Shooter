@@ -118,8 +118,6 @@ def create_baddie(screen, baddies, settings, audio):
 def level_up(stats):
     stats.level += 1
     stats.baddie_drop_speed *= 1.1
-    stats.baddie_interval *= 0.2
-    print('Baddie interval now',stats.baddie_interval)
 
 
 def update_baddies(baddies, settings, stats):

@@ -35,7 +35,7 @@ def run_game():
     play_button = Button(settings, screen, "Play")
     end_msg = Result(settings, screen, stats, play_button)
     ADDBADDIE = pygame.USEREVENT + 1
-    pygame.time.set_timer(ADDBADDIE, stats.baddie_interval) # baddie interval changing but it's not changing in game because this only runs at the start of the game. How do I make it update?
+    pygame.time.set_timer(ADDBADDIE, settings.baddie_interval)
 
     while True:
         if not stats.game_active:

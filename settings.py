@@ -11,7 +11,7 @@ class Settings:
         self.bullet_width = 10
 
         self.starting_baddie_drop_speed = 0.2
-        self.starting_baddie_interval = 1000
+        self.baddie_interval = 1000
         self.starting_baddie_total = 10
 
         self.lives_limit = 0

@@ -7,7 +7,7 @@ class Player:
         self.screen = screen
         self.screen_rect = self.screen.get_rect()
 
-        self.image = pygame.image.load('images/KP.bmp')
+        self.image = pygame.image.load('images/ship.bmp')
         self.rect = self.image.get_rect()
 
         self.rect.centerx = self.screen_rect.centerx

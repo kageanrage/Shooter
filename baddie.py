@@ -27,6 +27,6 @@ class Baddie(Sprite):
 
 
 def select_image():
-    filenames = ['Trump1', 'Trump2', 'Trump3']
+    filenames = ['Trump1', 'Trump2', 'Trump3', 'Trump4', 'Trump5', 'Trump6', 'Trump7', ]
     file_with_path = "images/{}.bmp".format(random.choice(filenames))
     return file_with_path

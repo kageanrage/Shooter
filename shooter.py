@@ -1,11 +1,10 @@
 # Shooter.py - a self-designed baddie shooting game
 
 # next steps:
-# ease difficulty increase and tweak - solve baddie_interval update issue
 # Once level passed, pause and show message ‘Level X passed!’
 
 # change character img - let the user choose who they are from a range of family photos?
-# online scoreboard
+# online scoreboard ?
 
 
 import pygame

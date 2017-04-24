@@ -101,13 +101,13 @@ def update_bullets(bullets):
             bullets.remove(bullet)
 
 
-def check_bullet_collisions(baddies, bullets, stats, audio):
+def check_bullet_collisions(baddies, bullets, stats, audio, settings):
     collisions = pygame.sprite.groupcollide(baddies, bullets, True, True)
     if collisions:
         stats.score += 1
         # audio.baddie_ded.play()
         if stats.score > 0:
-            if (stats.score % 10) == 0:
+            if (stats.score % settings.baddies_per_round) == 0:
                 level_up(stats, audio)
 
 

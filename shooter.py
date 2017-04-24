@@ -3,8 +3,6 @@
 # next steps:
 # Once level passed, pause and show message ‘Level X passed!’
 
-
-
 import pygame
 
 from player import Player
@@ -42,7 +40,7 @@ def run_game():
             gf.no_longer_first_round(stats)   # just an inelegant flag tied to 'you're dead' message
             gf.move(player)
             gf.update_bullets(bullets)
-            gf.check_bullet_collisions(baddies, bullets, stats, audio)
+            gf.check_bullet_collisions(baddies, bullets, stats, audio, settings)
             gf.update_baddies(baddies, settings, stats)
             gf.check_baddie_player_collisions(baddies, player, stats, bullets, audio)
             gf.check_baddie_screen_bottom(screen, stats, player, bullets, baddies, audio)

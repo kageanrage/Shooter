@@ -105,7 +105,7 @@ def check_bullet_collisions(baddies, bullets, stats, audio):
     collisions = pygame.sprite.groupcollide(baddies, bullets, True, True)
     if collisions:
         stats.score += 1
-        audio.baddie_ded.play()
+        # audio.baddie_ded.play()
         if stats.score > 0:
             if (stats.score % 10) == 0:
                 level_up(stats, audio)
@@ -114,7 +114,7 @@ def check_bullet_collisions(baddies, bullets, stats, audio):
 def create_baddie(screen, baddies, settings, audio):
     new_baddie = Baddie(screen, settings)
     baddies.add(new_baddie)
-    audio.baddie_spawn.play()
+    # audio.baddie_spawn.play()
 
 
 def level_up(stats, audio):

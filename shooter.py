@@ -3,8 +3,6 @@
 # next steps:
 # Once level passed, pause and show message ‘Level X passed!’
 
-# change character img - let the user choose who they are from a range of family photos?
-# online scoreboard ?
 
 
 import pygame

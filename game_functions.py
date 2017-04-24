@@ -15,19 +15,19 @@ def check_events_whilst_inactive(player, bullets, baddies, stats, play_button):
             check_play_button(player, bullets, baddies, stats, play_button, mouse_x, mouse_y)
 
 
-def check_events(player, screen, settings, bullets, baddies, audio, ADDBADDIE):
+def check_events(player, screen, settings, bullets, baddies, audio, ADDBADDIE, stats):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
         if event.type == pygame.KEYDOWN:
-            check_keydown_events(event, player, screen, settings, bullets, baddies, audio)
+            check_keydown_events(event, player, screen, settings, bullets, baddies, audio, stats)
         if event.type == pygame.KEYUP:
             check_keyup_events(event, player)
         if event.type == ADDBADDIE:
             create_baddie(screen, baddies, settings, audio)
 
 
-def check_keydown_events(event, player, screen, settings, bullets, baddies, audio):
+def check_keydown_events(event, player, screen, settings, bullets, baddies, audio, stats):
     if event.key == pygame.K_RIGHT:
         player.moving_right = True
     if event.key == pygame.K_LEFT:
@@ -40,6 +40,8 @@ def check_keydown_events(event, player, screen, settings, bullets, baddies, audi
         fire_bullet(player, screen, settings, bullets, audio)
     if event.key == pygame.K_b:
         create_baddie(screen, baddies, settings, audio)
+    if event.key == pygame.K_l:
+        level_up(stats, audio)
 
 
 def check_keyup_events(event, player):
@@ -106,7 +108,7 @@ def check_bullet_collisions(baddies, bullets, stats, audio):
         audio.baddie_ded.play()
         if stats.score > 0:
             if (stats.score % 10) == 0:
-                level_up(stats)
+                level_up(stats, audio)
 
 
 def create_baddie(screen, baddies, settings, audio):
@@ -115,9 +117,10 @@ def create_baddie(screen, baddies, settings, audio):
     audio.baddie_spawn.play()
 
 
-def level_up(stats):
+def level_up(stats, audio):
     stats.level += 1
     stats.baddie_drop_speed *= 1.1
+    audio.play_trump_soundbite()
 
 
 def update_baddies(baddies, settings, stats):

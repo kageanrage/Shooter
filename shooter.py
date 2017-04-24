@@ -40,7 +40,7 @@ def run_game():
         if not stats.game_active:
             gf.check_events_whilst_inactive(player, bullets, baddies, stats, play_button)
         if stats.game_active:
-            gf.check_events(player, screen, settings, bullets, baddies, audio, ADDBADDIE)
+            gf.check_events(player, screen, settings, bullets, baddies, audio, ADDBADDIE, stats)
             gf.no_longer_first_round(stats)   # just an inelegant flag tied to 'you're dead' message
             gf.move(player)
             gf.update_bullets(bullets)

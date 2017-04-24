@@ -71,10 +71,10 @@ def move(player):
 
 
 def fire_bullet(player, screen, settings, bullets, audio):
-    audio.shot.play()
     new_bullet = Bullet(player, screen, settings)
-    bullets.add(new_bullet)
-
+    if len(bullets) < settings.max_bullets:
+        bullets.add(new_bullet)
+        audio.shot.play()
 
 def update_screen(player, screen, bullets, baddies, sb, stats, end_msg, play_button):
     screen.fill((255, 255, 255))

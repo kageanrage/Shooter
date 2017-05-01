@@ -15,19 +15,19 @@ def check_events_whilst_inactive(player, bullets, baddies, stats, play_button):
             check_play_button(player, bullets, baddies, stats, play_button, mouse_x, mouse_y)
 
 
-def check_events(player, screen, settings, bullets, baddies, audio, ADDBADDIE, stats):
+def check_events(player, screen, settings, bullets, baddies, audio, ADDBADDIE, stats, level_up_msg):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
         if event.type == pygame.KEYDOWN:
-            check_keydown_events(event, player, screen, settings, bullets, baddies, audio, stats)
+            check_keydown_events(event, player, screen, settings, bullets, baddies, audio, stats, level_up_msg)
         if event.type == pygame.KEYUP:
             check_keyup_events(event, player)
         if event.type == ADDBADDIE:
             create_baddie(screen, baddies, settings, audio)
 
 
-def check_keydown_events(event, player, screen, settings, bullets, baddies, audio, stats):
+def check_keydown_events(event, player, screen, settings, bullets, baddies, audio, stats, level_up_msg):
     if event.key == pygame.K_RIGHT:
         player.moving_right = True
     if event.key == pygame.K_LEFT:
@@ -41,7 +41,7 @@ def check_keydown_events(event, player, screen, settings, bullets, baddies, audi
     if event.key == pygame.K_b:
         create_baddie(screen, baddies, settings, audio)
     if event.key == pygame.K_l:
-        level_up(stats, audio)
+        level_up(stats, audio, level_up_msg)
 
 
 def check_keyup_events(event, player):
@@ -76,20 +76,28 @@ def fire_bullet(player, screen, settings, bullets, audio):
         bullets.add(new_bullet)
         audio.shot.play()
 
-def update_screen(player, screen, bullets, baddies, sb, stats, end_msg, play_button):
+
+def update_screen(player, screen, bullets, baddies, sb, stats, level_up_msg, settings):
     screen.fill((255, 255, 255))
     sb.prep_score()
     sb.show_score()
+    check_if_levelled_up(stats, level_up_msg, settings)
     for bullet in bullets.sprites():
         bullet.draw_bullet()
     player.blitme()
     for baddie in baddies.sprites():
         baddie.blitme()
-    if not stats.game_active:
-        play_button.draw_button()
-        if not stats.is_first_round:
-            end_msg.prep_msg(play_button)
-            end_msg.show_msg()
+    pygame.display.flip()
+
+
+def update_screen_whilst_inactive(screen, sb, stats, end_msg, play_button):
+    screen.fill((255, 255, 255))
+    sb.prep_score()
+    sb.show_score()
+    play_button.draw_button()
+    if not stats.is_first_round:
+        end_msg.prep_msg(play_button)
+        end_msg.show_msg()
     pygame.display.flip()
 
 
@@ -101,14 +109,14 @@ def update_bullets(bullets):
             bullets.remove(bullet)
 
 
-def check_bullet_collisions(baddies, bullets, stats, audio, settings):
+def check_bullet_collisions(baddies, bullets, stats, audio, settings, level_up_msg):
     collisions = pygame.sprite.groupcollide(baddies, bullets, True, True)
     if collisions:
         stats.score += 1
         # audio.baddie_ded.play()
         if stats.score > 0:
             if (stats.score % settings.baddies_per_round) == 0:
-                level_up(stats, audio)
+                level_up(stats, audio, level_up_msg)
 
 
 def create_baddie(screen, baddies, settings, audio):
@@ -117,10 +125,22 @@ def create_baddie(screen, baddies, settings, audio):
     # audio.baddie_spawn.play()
 
 
-def level_up(stats, audio):
+def level_up(stats, audio, level_up_msg):
     stats.level += 1
     stats.baddie_drop_speed *= 1.1
     audio.play_trump_soundbite()
+    time.sleep(1)
+
+
+def check_if_levelled_up(stats, level_up_msg, settings):
+    if stats.score > 0:
+        if stats.score % settings.baddies_per_round == 0:
+                display_level_up_msg(level_up_msg)
+
+
+def display_level_up_msg(level_up_msg):
+    level_up_msg.prep_level_up_msg()
+    level_up_msg.show_level_up_msg()
 
 
 def update_baddies(baddies, settings, stats):

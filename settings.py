@@ -13,6 +13,6 @@ class Settings:
 
         self.starting_baddie_drop_speed = 0.2
         self.baddie_interval = 1000
-        self.baddies_per_round = 10
+        self.baddies_per_round = 3
 
         self.lives_limit = 0
